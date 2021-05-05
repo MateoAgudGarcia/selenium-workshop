@@ -3,12 +3,163 @@
  */
 package workshop.selenium.java;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
+import org.apache.log4j.PropertyConfigurator;
+import org.apache.log4j.Logger;
+import org.checkerframework.checker.units.qual.C;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.opera.OperaDriver;
+import org.opentest4j.AssertionFailedError;
+import workshop.selenium.java.pom.MainPageGoogle;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class AppTest {
-    @Test void appHasAGreeting() {
-        App classUnderTest = new App();
-        assertNotNull(classUnderTest.getGreeting(), "app should have a greeting");
+    private static final Integer NUM_BROWSER = 1;
+    private static final boolean HEAD = false;
+    private static final WebDriver DRIVER_CUR = browser(NUM_BROWSER,HEAD);
+    private static final String URL_WEBSITE = "https://www.google.com/";
+    private static final String BROWSER_SEL = browSelec(NUM_BROWSER,HEAD);
+    private static final Logger log = Logger.getLogger(AppTest.class);
+    private final String ERROR_MESSAGE = "ERROR\tTest failed\n";
+
+    MainPageGoogle mainPageGoogle = new MainPageGoogle(DRIVER_CUR);
+
+    public static WebDriver browser(int brow, boolean head){
+        WebDriver driv = null;
+
+        WebDriverManager.chromedriver().setup();
+        WebDriverManager.firefoxdriver().setup();
+        WebDriverManager.operadriver().setup();
+        WebDriverManager.edgedriver().setup();
+
+        switch (brow){
+            case 1:
+                if(head){
+                    driv = new ChromeDriver();
+                }else{
+                    ChromeOptions options = new ChromeOptions();
+                    options.addArguments("--headless");
+                    driv = new ChromeDriver(options);
+                }
+                break;
+            case 2:
+                driv = new FirefoxDriver();
+                break;
+            case 3:
+                driv = new OperaDriver();
+                break;
+            case 4:
+                driv = new EdgeDriver();
+                break;
+            default:
+                System.out.println("Datos ingresados erroneos");
+        }
+        return driv;
     }
+    public static String browSelec(int brow, boolean head){
+        String brSel = "Browser selected : ";
+        String erSel = "Datos ingresados erroneos";
+        String res = "";
+
+        boolean errS;
+
+        switch (brow){
+            case 1:
+            case 2:
+            case 3:
+            case 4:
+                errS = false;
+                break;
+            default:
+                errS = true;
+        }
+        switch (brow){
+            case 1:
+                if(head){
+                    brSel = brSel+"Google Chrome";
+                }else{
+                    brSel = brSel+"Google Chrome - HEADLESS";
+                }
+                break;
+            case 2:
+                brSel = brSel+"Firefox";
+                break;
+            case 3:
+                brSel = brSel+"Opera";
+                break;
+            case 4:
+                brSel = brSel+"Microsoft Edge";
+                break;
+            default:
+                brSel = "";
+        }
+        if (!errS){
+            res = brSel;
+        } else{
+            res = erSel;
+        }
+        return res;
+    }
+
+    @BeforeAll
+    static void setUp(){
+        PropertyConfigurator.configure(System.getProperty("user.dir")+"\\src\\main\\resources\\log4j-test.properties");
+        log.info("+++++++++++++++++++++++++++++++++++++++++++++++++++++");
+        log.info(BROWSER_SEL);
+
+        DRIVER_CUR.get(URL_WEBSITE);
+        DRIVER_CUR.manage().window().maximize();
+    }
+
+    @AfterAll
+    static void tearDown() {
+        DRIVER_CUR.quit();
+
+        log.info("+++++++++++++++++++++++++++++++++++++++++++++++++++++");
+    }
+
+    @DisplayName("Verify country of origin")
+    @Test
+    void countryTest(){
+        try {
+            String COUNTRY = "Colombia";
+            assertEquals(COUNTRY,mainPageGoogle.countryGoogle());
+
+            log.info("PASSED\t"+COUNTRY +" was found on title of Google");
+
+        } catch (Exception | AssertionFailedError exception){
+            log.error(ERROR_MESSAGE+exception.getMessage());
+            throw new AssertionError(ERROR_MESSAGE+exception.getMessage());
+        }
+    }
+
+    @DisplayName("Easy search on Google and verify title")
+    @Test
+    void searchTest(){
+        try {
+            String search = "Mechatroniker";
+
+            mainPageGoogle.searchGoogle(search);
+            mainPageGoogle.clkSearch();
+
+            String namePage = DRIVER_CUR.getTitle();
+            assertTrue(namePage.contains(search));
+
+            log.info("PASSED\t"+search+" was found on title of Google");
+        } catch (Exception | AssertionFailedError exception){
+            log.error(ERROR_MESSAGE+exception.getMessage());
+            throw new AssertionError(ERROR_MESSAGE+exception.getMessage());
+        }
+    }
+
 }

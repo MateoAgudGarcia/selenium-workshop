@@ -18,13 +18,17 @@ repositories {
 
 dependencies {
     // Use JUnit Jupiter API for testing.
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.2'
+    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.8.0-M1'
+    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-params', version: '5.8.0-M1'
 
     // Use JUnit Jupiter Engine for testing.
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
+    testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.8.0-M1'
 
     // This dependency is used by the application.
     implementation 'com.google.guava:guava:29.0-jre'
+    implementation group: 'log4j', name: 'log4j', version: '1.2.17'
+    implementation group: 'io.github.bonigarcia', name: 'webdrivermanager', version: '4.4.1'
+    implementation group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '4.0.0-beta-3'
 }
 
 application {
@@ -32,7 +36,11 @@ application {
     mainClass = 'workshop.selenium.java.App'
 }
 
-tasks.named('test') {
+test{
     // Use junit platform for unit tests.
     useJUnitPlatform()
+    testLogging.showStandardStreams = true
+    testLogging {
+        events "passed", "skipped", "failed"
+    }
 }
