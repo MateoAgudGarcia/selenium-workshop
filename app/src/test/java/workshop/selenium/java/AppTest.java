@@ -46,8 +46,7 @@ class AppTest extends WebSite{
 
         LOGGER.info("+++++++++++++++++++++++++++++++++++++++++++++++++++++");
     }
-
-    @Disabled
+    
     @DisplayName("Verify country of origin")
     @Test
     void countryTest(){
