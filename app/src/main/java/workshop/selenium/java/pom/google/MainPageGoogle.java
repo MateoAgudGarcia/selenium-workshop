@@ -1,4 +1,4 @@
-package workshop.selenium.java.pom;
+package workshop.selenium.java.pom.google;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;

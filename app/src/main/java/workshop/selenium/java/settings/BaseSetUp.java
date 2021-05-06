@@ -1,14 +1,12 @@
 package workshop.selenium.java.settings;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.opera.OperaDriver;
-import workshop.selenium.java.pom.MainPageGoogle;
 
 public class BaseSetUp {
     public BaseSetUp() {}
