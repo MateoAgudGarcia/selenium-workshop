@@ -15,7 +15,7 @@ import workshop.selenium.java.store.StoreTest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
+@Disabled
 class GoogleTest extends WebSite{
 
     private static final int BROWSER_CHN = 1;

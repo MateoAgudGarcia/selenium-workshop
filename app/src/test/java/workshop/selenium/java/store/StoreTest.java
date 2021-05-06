@@ -3,7 +3,6 @@ package workshop.selenium.java.store;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 import org.junit.jupiter.api.*;
-import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.opentest4j.AssertionFailedError;
@@ -53,9 +52,10 @@ public class StoreTest extends WebSite {
 
     @Test
     @Order(1)
+    @DisplayName("Select T-Shirt section on page")
     void testStorePage(){
         try {
-            WEB_DRIVER.findElement(clothesStore.LOC01).click();
+            clothesStore.selTShirtSection();
         } catch (Exception | AssertionFailedError exception){
             LOGGER.error(errMsg()+exception.getMessage());
             throw new AssertionError(errMsg()+exception.getMessage());
@@ -64,9 +64,10 @@ public class StoreTest extends WebSite {
 
     @Test
     @Order(2)
+    @DisplayName("Add cart click button")
     void testStorePage02(){
         try {
-            WEB_DRIVER.findElement(clothesStore.LOC02).click();
+            clothesStore.clkAddCartBtn();
         } catch (Exception | AssertionFailedError exception){
             LOGGER.error(errMsg()+exception.getMessage());
             throw new AssertionError(errMsg()+exception.getMessage());
@@ -76,9 +77,10 @@ public class StoreTest extends WebSite {
 
     @Test
     @Order(3)
+    @DisplayName("First click checkout button")
     void testStorePage03(){
         try {
-            WEB_DRIVER.findElement(clothesStore.LOC03).click();
+            clothesStore.clkCheckoutBtn();
         } catch (Exception | AssertionFailedError exception){
             LOGGER.error(errMsg()+exception.getMessage());
             throw new AssertionError(errMsg()+exception.getMessage());
@@ -88,9 +90,10 @@ public class StoreTest extends WebSite {
 
     @Test
     @Order(4)
+    @DisplayName("Second click checkout button")
     void testStorePage04(){
         try {
-            WEB_DRIVER.findElement(clothesStore.LOC04).click();
+            clothesStore.clkCheckoutBtn2();
         } catch (Exception | AssertionFailedError exception){
             LOGGER.error(errMsg()+exception.getMessage());
             throw new AssertionError(errMsg()+exception.getMessage());
@@ -100,9 +103,10 @@ public class StoreTest extends WebSite {
 
     @Test
     @Order(5)
+    @DisplayName("Log-in user")
     void testStorePage05(){
         try {
-            WEB_DRIVER.findElement(clothesStore.LOC05).sendKeys("aperdomobo@gmail.com");
+            clothesStore.logInClothes("aperdomobo@gmail.com","WorkshopProtractor");
         } catch (Exception | AssertionFailedError exception){
             LOGGER.error(errMsg()+exception.getMessage());
             throw new AssertionError(errMsg()+exception.getMessage());
@@ -112,9 +116,10 @@ public class StoreTest extends WebSite {
 
     @Test
     @Order(6)
+    @DisplayName("Third click checkout button")
     void testStorePage06(){
         try {
-            WEB_DRIVER.findElement(clothesStore.LOC06).sendKeys("WorkshopProtractor");
+            clothesStore.clkCheckoutBtn3();
         } catch (Exception | AssertionFailedError exception){
             LOGGER.error(errMsg()+exception.getMessage());
             throw new AssertionError(errMsg()+exception.getMessage());
@@ -124,9 +129,10 @@ public class StoreTest extends WebSite {
 
     @Test
     @Order(7)
+    @DisplayName("Agree terms of page to buy")
     void testStorePage07(){
         try {
-            WEB_DRIVER.findElement(clothesStore.LOC07).click();
+            clothesStore.agreeTermsCheck();
         } catch (Exception | AssertionFailedError exception){
             LOGGER.error(errMsg()+exception.getMessage());
             throw new AssertionError(errMsg()+exception.getMessage());
@@ -136,9 +142,10 @@ public class StoreTest extends WebSite {
 
     @Test
     @Order(8)
+    @DisplayName("Fourth click checkout button")
     void testStorePage08(){
         try {
-            WEB_DRIVER.findElement(clothesStore.LOC08).click();
+            clothesStore.clkCheckoutBtn4();
         } catch (Exception | AssertionFailedError exception){
             LOGGER.error(errMsg()+exception.getMessage());
             throw new AssertionError(errMsg()+exception.getMessage());
@@ -148,9 +155,10 @@ public class StoreTest extends WebSite {
 
     @Test
     @Order(9)
+    @DisplayName("Pay bank selection option")
     void testStorePage09(){
         try {
-            WEB_DRIVER.findElement(clothesStore.LOC09).click();
+            clothesStore.payBankSelection();
         } catch (Exception | AssertionFailedError exception){
             LOGGER.error(errMsg()+exception.getMessage());
             throw new AssertionError(errMsg()+exception.getMessage());
@@ -160,9 +168,10 @@ public class StoreTest extends WebSite {
 
     @Test
     @Order(10)
+    @DisplayName("Confirm order click selector")
     void testStorePage10(){
         try {
-            WEB_DRIVER.findElement(clothesStore.LOC10).click();
+            clothesStore.confirmOrder();
         } catch (Exception | AssertionFailedError exception){
             LOGGER.error(errMsg()+exception.getMessage());
             throw new AssertionError(errMsg()+exception.getMessage());
@@ -174,35 +183,10 @@ public class StoreTest extends WebSite {
     @Order(11)
     void testStorePage11(){
         try {
-            WEB_DRIVER.findElement(clothesStore.LOC11).click();
+            clothesStore.acceptanceResult();
         } catch (Exception | AssertionFailedError exception){
             LOGGER.error(errMsg()+exception.getMessage());
             throw new AssertionError(errMsg()+exception.getMessage());
         }
-
-    }
-
-    @Test
-    @Order(12)
-    void testStorePage12(){
-        try {
-            WEB_DRIVER.findElement(clothesStore.LOC12).click();
-        } catch (Exception | AssertionFailedError exception){
-            LOGGER.error(errMsg()+exception.getMessage());
-            throw new AssertionError(errMsg()+exception.getMessage());
-        }
-
-    }
-
-    @Test
-    @Order(13)
-    void testStorePage13(){
-        try {
-            assertEquals("Your order on My Store is complete.",WEB_DRIVER.findElement(clothesStore.LOC13).getText());
-        } catch (Exception | AssertionFailedError exception){
-            LOGGER.error(errMsg()+exception.getMessage());
-            throw new AssertionError(errMsg()+exception.getMessage());
-        }
-
     }
 }
