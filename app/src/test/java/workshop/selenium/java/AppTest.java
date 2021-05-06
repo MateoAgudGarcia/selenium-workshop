@@ -131,6 +131,7 @@ class AppTest {
     @DisplayName("Verify country of origin")
     @Test
     void countryTest(){
+        System.out.println(mainPageGoogle.countryGoogle());
         try {
             String COUNTRY = "Colombia";
             assertEquals(COUNTRY,mainPageGoogle.countryGoogle());
