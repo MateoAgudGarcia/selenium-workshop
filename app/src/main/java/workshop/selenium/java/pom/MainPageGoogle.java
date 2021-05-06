@@ -15,8 +15,7 @@ public class MainPageGoogle {
     private final By FEEL_LUCKY = By.cssSelector("input.RNmpXc");
     private final By GOOGLE_APPS = By.cssSelector("svg.gb_We");
     private final By LOG_IN = By.cssSelector("a.gb_4.gb_5.gb_ae.gb_4c");
-//    private final By COUNTRY = By.cssSelector("div.uU7dJb");
-    private final By COUNTRY = By.cssSelector("body > div.L3eUgb > div.o3j99.c93Gbe > div.uU7dJb");
+    private final By COUNTRY = By.cssSelector("div.uU7dJb");
 
 
     public MainPageGoogle(WebDriver DRIVER_USED) {
