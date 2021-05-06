@@ -5,10 +5,7 @@ package workshop.selenium.java;
 
 import org.apache.log4j.PropertyConfigurator;
 import org.apache.log4j.Logger;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.opentest4j.AssertionFailedError;
@@ -50,6 +47,7 @@ class AppTest extends WebSite{
         LOGGER.info("+++++++++++++++++++++++++++++++++++++++++++++++++++++");
     }
 
+    @Disabled
     @DisplayName("Verify country of origin")
     @Test
     void countryTest(){
